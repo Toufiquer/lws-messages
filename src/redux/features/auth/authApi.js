@@ -1,4 +1,5 @@
 import { apiSlice } from "../api/apiSlice";
+import { userLoggedIn } from "./authSlice";
 const saveToLocalStorage = (name, data) => {
   localStorage.setItem(
     name,
@@ -24,9 +25,11 @@ export const authApi = apiSlice.injectEndpoints({
             user: result.data.user,
           };
           saveToLocalStorage("auth", { ...data });
-          dispatch({
-            ...data,
-          });
+          dispatch(
+            userLoggedIn({
+              ...data,
+            })
+          );
         } catch (error) {}
       },
     }),
@@ -39,17 +42,16 @@ export const authApi = apiSlice.injectEndpoints({
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         try {
           const result = await queryFulfilled;
-          localStorage.setItem(
-            "auth",
-            JSON.stringify({
-              accessToken: result.data.accessToken,
-              user: result.data.user,
-            })
-          );
-          dispatch({
+          const data = {
             accessToken: result.data.accessToken,
             user: result.data.user,
-          });
+          };
+          saveToLocalStorage("auth", { ...data });
+          dispatch(
+            userLoggedIn({
+              ...data,
+            })
+          );
         } catch (error) {}
       },
     }),

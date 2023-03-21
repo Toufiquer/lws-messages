@@ -1,7 +1,26 @@
-import React from "react";
-import { Link } from "react-router-dom";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import lwsLogoLight from "../../assets/lws-logo-light.svg";
+import { useLoginMutation } from "../../redux/features/auth/authApi";
 const LogIn = () => {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [error, setError] = useState("");
+  const [login, { data, isLoading, isError, error: logInError }] =
+    useLoginMutation();
+  const navigate = useNavigate();
+  useEffect(() => {
+    setError("");
+    isError && setError(logInError.data);
+    data?.accessToken && navigate("/inbox");
+  }, [logInError, data, isError, navigate]);
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    login({
+      email,
+      password,
+    });
+  };
   return (
     <>
       {" "}
@@ -18,7 +37,7 @@ const LogIn = () => {
                 Sign in to your account
               </h2>
             </div>
-            <form className="mt-8 space-y-6" action="#" method="POST">
+            <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
               <input type="hidden" name="remember" value="true" />
               <div className="rounded-md shadow-sm -space-y-px">
                 <div>
@@ -33,6 +52,8 @@ const LogIn = () => {
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                     placeholder="Email address"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                   />
                 </div>
                 <div>
@@ -47,6 +68,8 @@ const LogIn = () => {
                     required
                     className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-violet-500 focus:border-violet-500 focus:z-10 sm:text-sm"
                     placeholder="Password"
+                    value={password}
+                    onChange={(e) => setPassword(e.target.value)}
                   />
                 </div>
               </div>
@@ -55,6 +78,7 @@ const LogIn = () => {
                 <div className="text-sm">
                   <Link
                     to="#"
+                    disabled
                     className="font-medium text-violet-600 hover:text-violet-500"
                   >
                     Forgot your password?
@@ -64,6 +88,7 @@ const LogIn = () => {
 
               <div>
                 <button
+                  disabled={isLoading}
                   type="submit"
                   className="group relative w-full flex justify-center py-2 px-4 border border-transparent text-sm font-medium rounded-md text-white bg-violet-600 hover:bg-violet-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-violet-500"
                 >
@@ -71,6 +96,7 @@ const LogIn = () => {
                 </button>
               </div>
             </form>
+            {error && <h2>{error}</h2>}
           </div>
         </div>
       </div>
