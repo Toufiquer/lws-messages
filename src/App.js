@@ -33,7 +33,14 @@ function App() {
             </PublicRoute>
           }
         />
-        <Route path="/registration" element={<Registration />} />
+        <Route
+          path="/registration"
+          element={
+            <PublicRoute>
+              <Registration />
+            </PublicRoute>
+          }
+        />
         <Route
           path="/inbox"
           element={

@@ -1,7 +1,14 @@
 import React from "react";
+import { useDispatch } from "react-redux";
 import { Link } from "react-router-dom";
 import lwsLogoDark from "../../assets/lws-logo-dark.svg";
+import { userLoggedOut } from "../../redux/features/auth/authSlice";
 const Nav = () => {
+  const dispatch = useDispatch();
+  const handleSighOut = () => {
+    dispatch(userLoggedOut());
+    localStorage.setItem("auth", "");
+  };
   return (
     <>
       <nav className="border-general sticky top-0 z-40 border-b bg-violet-700 transition-colors">
@@ -13,7 +20,9 @@ const Nav = () => {
             </Link>
             <ul>
               <li className="text-white">
-                <Link to="/">Logout</Link>
+                <Link onClick={handleSighOut} to="/">
+                  Logout
+                </Link>
               </li>
             </ul>
           </div>
