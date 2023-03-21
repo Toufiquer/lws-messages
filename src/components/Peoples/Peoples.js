@@ -3,13 +3,13 @@ import moment from "moment/moment";
 import React from "react";
 import { useSelector } from "react-redux";
 import { Link } from "react-router-dom";
-import { useGetConversationQuery } from "../../redux/features/conversation/conversationApi";
+import { useGetConversationsQuery } from "../../redux/features/conversation/conversationApi";
 import { getParticipants } from "../../utils/getParticipants";
 
 const Peoples = () => {
   const { user } = useSelector((state) => state.auth) || {};
   const { email } = user || {};
-  const { data, isLoading, isError, error } = useGetConversationQuery(email);
+  const { data, isLoading, isError, error } = useGetConversationsQuery(email);
   let content;
   if (isLoading && !isError) {
     content = <li className={` text-center`}>Loading...</li>;
