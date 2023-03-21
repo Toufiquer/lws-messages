@@ -74,7 +74,7 @@ const LogIn = () => {
                 </div>
               </div>
 
-              <div className="flex items-center justify-end">
+              <div className="flex items-center justify-between">
                 <div className="text-sm">
                   <Link
                     to="#"
@@ -82,6 +82,15 @@ const LogIn = () => {
                     className="font-medium text-violet-600 hover:text-violet-500"
                   >
                     Forgot your password?
+                  </Link>
+                </div>
+                <div className="text-sm">
+                  <Link
+                    to="/registration"
+                    disabled
+                    className="font-medium text-violet-600 hover:text-violet-500"
+                  >
+                    Registration
                   </Link>
                 </div>
               </div>

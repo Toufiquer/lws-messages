@@ -1,8 +1,9 @@
 import React from "react";
+import Chat from "../../components/Chat/Chat";
 
 import Nav from "../../components/Nav/Nav";
 import Peoples from "../../components/Peoples/Peoples";
-const Inbox = () => {
+const Conversation = () => {
   return (
     <>
       {" "}
@@ -34,14 +35,7 @@ const Inbox = () => {
               <Peoples />
             </div>
             <div className="w-full lg:col-span-2 lg:block">
-              <div className="flex items-center justify-center h-full">
-                <div className="w-full  conversation-row-grid flex">
-                  <div className="text-4xl flex items-center justify-center h-full w-full">
-                    Please Select to Chat
-                  </div>
-                  {/* <Chat></Chat> */}
-                </div>
-              </div>
+              <Chat></Chat>
             </div>
           </div>
         </div>
@@ -50,4 +44,4 @@ const Inbox = () => {
   );
 };
 
-export default Inbox;
+export default Conversation;

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import lwsLogoLight from "../../assets/lws-logo-light.svg";
 import { useRegisterMutation } from "../../redux/features/auth/authApi";
 const Registration = () => {
@@ -141,7 +141,17 @@ const Registration = () => {
                   </label>
                 </div>
               </div>
-
+              <div className="flex items-center justify-between">
+                <div className="text-sm">
+                  <Link
+                    to="/login"
+                    disabled
+                    className="font-medium text-violet-600 hover:text-violet-500"
+                  >
+                    Logged In
+                  </Link>
+                </div>
+              </div>
               <div>
                 <button
                   type="submit"
