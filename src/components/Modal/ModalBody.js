@@ -28,7 +28,6 @@ const ModalBody = ({ handleModal }) => {
   const [addConversation, {}] = useAddConversationMutation();
   const [editConversation, {}] = useEditConversationMutation();
   useEffect(() => {
-    console.log(participant, email, " => Line No: 30");
     if (participant?.length > 0 && participant[0].email !== myEmail) {
       // check conversation exist
       dispatch(
@@ -71,16 +70,21 @@ const ModalBody = ({ handleModal }) => {
       timestamp: new Date().getTime(),
     };
     e.preventDefault();
-    console.log(data, " => Line No: 77");
     if (conversation.length === 0) {
       // add conversation
-      addConversation({ ...data });
+      addConversation({
+        sender: myEmail,
+        data: { ...data },
+      });
     } else {
       // edit conversation
-      editConversation({ id: participant[0].id, data: { ...data } });
+      editConversation({
+        id: participant[0].id,
+        data: { ...data },
+        sender: myEmail,
+      });
     }
-    handleModal();
-    console.log("from submitted", " => Line No: 66");
+    // handleModal();
   };
   return (
     <>
