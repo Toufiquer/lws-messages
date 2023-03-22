@@ -7,7 +7,8 @@ const Chats = ({ data }) => {
   const { email } = user || {};
   const content = data.map((i) => {
     const textJustify =
-      email !== i.sender.email ? "justify-start" : "justify-end";
+      email === i.sender.email ? "justify-end" : "justify-start";
+    console.log(email === i.sender.email, email, i.sender, " => Line No: 12");
     return <Message key={i.id} message={i.message} justifyText={textJustify} />;
   });
   return (

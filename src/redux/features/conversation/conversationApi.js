@@ -1,6 +1,21 @@
 import { apiSlice } from "../api/apiSlice";
 import { messageApi } from "../message/messageApi";
-
+const createObject = (arg, query) => {
+  const conversationId = query.data.id;
+  const findSender = query.data.users.find((i) => i.email === arg.sender);
+  const findReceiver = query.data.users.find((i) => i.email !== arg.sender);
+  const message = query.data.message;
+  const timestamp = query.data.timestamp;
+  let sender = {};
+  let receiver = {};
+  sender.email = findSender.email;
+  sender.name = findSender.name;
+  sender.id = findSender.id;
+  receiver.email = findReceiver.email;
+  receiver.name = findReceiver.name;
+  receiver.id = findReceiver.id;
+  return { conversationId, message, timestamp, sender, receiver };
+};
 export const conversationApi = apiSlice.injectEndpoints({
   endpoints: (builder) => ({
     // endpoints here
@@ -20,8 +35,17 @@ export const conversationApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         const query = await queryFulfilled;
-        console.log(arg, query, " => Line No: 22");
-        //
+        const { conversationId, message, timestamp, sender, receiver } =
+          createObject(arg, query);
+        dispatch(
+          messageApi.endpoints.addMessages.initiate({
+            conversationId,
+            message,
+            timestamp,
+            sender,
+            receiver,
+          })
+        );
       },
     }),
     editConversation: builder.mutation({
@@ -32,9 +56,17 @@ export const conversationApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         const query = await queryFulfilled;
-        console.log(arg, " => Line No: 22");
-        console.log(query, " => Line No: 22");
-        //
+        const { conversationId, message, timestamp, sender, receiver } =
+          createObject(arg, query);
+        dispatch(
+          messageApi.endpoints.addMessages.initiate({
+            conversationId,
+            message,
+            timestamp,
+            sender,
+            receiver,
+          })
+        );
       },
     }),
   }),

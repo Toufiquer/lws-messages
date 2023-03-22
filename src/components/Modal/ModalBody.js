@@ -79,7 +79,7 @@ const ModalBody = ({ handleModal }) => {
     } else {
       // edit conversation
       editConversation({
-        id: participant[0].id,
+        id: conversation[0].id,
         data: { ...data },
         sender: myEmail,
       });
