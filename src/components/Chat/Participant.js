@@ -3,14 +3,13 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 const Participant = ({ chat }) => {
-  console.log(chat, " => Line No: 4");
   const { user } = useSelector((state) => state.auth) || {};
   const { email } = user || {};
   const participantEmail =
     email !== chat.sender.email ? chat.sender.email : chat.receiver.email;
   const participantName =
     email !== chat.sender.email ? chat.sender.name : chat.receiver.name;
-  console.log(participantEmail, " => Line No: 10");
+
   return (
     <>
       <div className="relative flex items-center p-3 border-b border-gray-300">

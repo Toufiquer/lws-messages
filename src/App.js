@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import { useAuthChecked } from "./hooks/useAuthChecked";
+import { useCheckExpire } from "./hooks/useCheckExpire";
 import Conversation from "./pages/Conversation/Conversation";
 import Home from "./pages/Home/Home";
 import Inbox from "./pages/Inbox/Inbox";
@@ -12,6 +13,8 @@ import PublicRoute from "./PublicRoute/PublicRoute";
 
 function App() {
   const isAuthCheck = useAuthChecked();
+  // useCheckExpire();
+
   return isAuthCheck ? (
     <h2>Authorization Checking ...</h2>
   ) : (

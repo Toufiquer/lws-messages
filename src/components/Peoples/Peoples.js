@@ -9,6 +9,7 @@ import { getParticipants } from "../../utils/getParticipants";
 const Peoples = () => {
   const { user } = useSelector((state) => state.auth) || {};
   const { email } = user || {};
+  console.log(email, " => Line No: 12");
   const { data, isLoading, isError, error } = useGetConversationsQuery(email);
   let content;
   if (isLoading && !isError) {
@@ -53,6 +54,7 @@ const Peoples = () => {
       );
     });
   }
+  console.log(data, email, " => Line No: 56");
   return (
     <>
       {" "}

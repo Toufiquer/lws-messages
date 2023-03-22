@@ -6,23 +6,6 @@ const Modal = () => {
   const handleModal = () => {
     setModalOpen(!modalOpen);
   };
-  const debounceHandler = (fn, delay) => {
-    let timeOutId;
-    return (...args) => {
-      clearTimeout(timeOutId);
-      timeOutId = setTimeout(() => {
-        fn(...args);
-      }, delay);
-    };
-  };
-  const doSearch = () => {
-    console.log("hello");
-  };
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    handleModal();
-    debounceHandler(doSearch, 500);
-  };
   return (
     <>
       <div className="h-[65px] text-center text-grey-500 p-4 border-b border-gray-300 flex md:justify-end justify-center">
@@ -46,7 +29,7 @@ const Modal = () => {
           />
         </svg>
       </div>
-      {modalOpen && <ModalBody handleSubmit={handleSubmit} />}
+      {modalOpen && <ModalBody handleModal={handleModal} />}
     </>
   );
 };
