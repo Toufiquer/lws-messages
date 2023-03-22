@@ -6,7 +6,8 @@ const Chats = ({ data }) => {
   const { user } = useSelector((state) => state.auth) || {};
   const { email } = user || {};
   const content = data.map((i) => {
-    const textJustify = email !== i.sender.email ? "start" : "end";
+    const textJustify =
+      email !== i.sender.email ? "justify-start" : "justify-end";
     return <Message key={i.id} message={i.message} justifyText={textJustify} />;
   });
   return (

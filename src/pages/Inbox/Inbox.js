@@ -2,7 +2,7 @@ import React from "react";
 
 import Nav from "../../components/Nav/Nav";
 import Peoples from "../../components/Peoples/Peoples";
-import Modal from "./Modal";
+import Modal from "../../components/Modal/Modal";
 const Inbox = () => {
   return (
     <>
