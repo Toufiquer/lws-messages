@@ -26,8 +26,7 @@ const Chat = () => {
       <div className="w-full grid conversation-row-grid">
         {data?.length > 0 && <Participant chat={data[0]} />}
         <div className="relative w-full p-6 overflow-y-auto">{content}</div>
-
-        <SendMessage />
+        {data?.length > 0 && <SendMessage info={data[0]} />}
       </div>
     </>
   );
