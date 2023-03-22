@@ -35,17 +35,19 @@ export const conversationApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         const query = await queryFulfilled;
-        const { conversationId, message, timestamp, sender, receiver } =
-          createObject(arg, query);
-        dispatch(
-          messageApi.endpoints.addMessages.initiate({
-            conversationId,
-            message,
-            timestamp,
-            sender,
-            receiver,
-          })
-        );
+        if (query?.data?.id) {
+          const { conversationId, message, timestamp, sender, receiver } =
+            createObject(arg, query);
+          dispatch(
+            messageApi.endpoints.addMessages.initiate({
+              conversationId,
+              message,
+              timestamp,
+              sender,
+              receiver,
+            })
+          );
+        }
       },
     }),
     editConversation: builder.mutation({
@@ -56,17 +58,19 @@ export const conversationApi = apiSlice.injectEndpoints({
       }),
       async onQueryStarted(arg, { queryFulfilled, dispatch }) {
         const query = await queryFulfilled;
-        const { conversationId, message, timestamp, sender, receiver } =
-          createObject(arg, query);
-        dispatch(
-          messageApi.endpoints.addMessages.initiate({
-            conversationId,
-            message,
-            timestamp,
-            sender,
-            receiver,
-          })
-        );
+        if (query?.data?.id) {
+          const { conversationId, message, timestamp, sender, receiver } =
+            createObject(arg, query);
+          dispatch(
+            messageApi.endpoints.addMessages.initiate({
+              conversationId,
+              message,
+              timestamp,
+              sender,
+              receiver,
+            })
+          );
+        }
       },
     }),
   }),
