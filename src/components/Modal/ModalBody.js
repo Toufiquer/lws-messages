@@ -84,7 +84,7 @@ const ModalBody = ({ handleModal }) => {
         sender: myEmail,
       });
     }
-    // handleModal();
+    handleModal();
   };
   return (
     <>
