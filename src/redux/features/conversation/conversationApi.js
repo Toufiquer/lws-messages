@@ -40,8 +40,6 @@ export const conversationApi = apiSlice.injectEndpoints({
         try {
           await cacheDataLoaded;
           socket.on("conversations", (data) => {
-            console.log(data, " => Line No: 43");
-
             updateCachedData((draft) => {
               const conversation = draft.find((c) => +c.id === data.data.id);
               if (conversation?.id) {
@@ -53,8 +51,8 @@ export const conversationApi = apiSlice.injectEndpoints({
             });
           });
         } catch (err) {}
-        // await cacheEntryRemoved;
-        // socket.close();
+        await cacheEntryRemoved;
+        socket.close();
       },
     }),
     getConversation: builder.query({
